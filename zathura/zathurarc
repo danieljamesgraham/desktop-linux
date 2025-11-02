@@ -2,13 +2,13 @@ set adjust-open "best-fit"
 
 set selection-clipboard clipboard
 
-set default-bg "rgba(40,40,40,0.75)"
+set default-bg "#282828"
 set inputbar-bg "#3c3836"
 set inputbar-fg "#ebdbb2"
 set statusbar-bg "#3c3836"
 set statusbar-fg "#bdae93"
 
-set font "DejaVuSansM Nerd Font Mono 12"
+set font "Hack 12"
 
 set statusbar-v-padding 5
 set statusbar-basename true
