@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo cp ~/.config/monitors.xml ~gdm/.config
+sudo chown gdm: ~gdm/.config/monitors.xml
