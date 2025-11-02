@@ -1,3 +1,7 @@
+set window-title-basename true
+set window-title-page true
+set guioptions ''
+
 set adjust-open "best-fit"
 
 set selection-clipboard clipboard

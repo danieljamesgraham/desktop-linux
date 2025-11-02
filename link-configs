@@ -1,0 +1,20 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+link_dir() {
+    local PACKAGE_NAME="$1"
+
+    local SRC_DIR="$SCRIPT_DIR/$PACKAGE_NAME"
+    local DEST_DIR="$HOME/.config/$PACKAGE_NAME"
+
+    if [ -d "$DEST_DIR" ]; then
+        rm -rf "$DEST_DIR"
+    fi
+    
+    ln -s "$SRC_DIR" "$DEST_DIR"
+}
+
+link_dir mpv
+link_dir xournalpp
+link_dir zathura
