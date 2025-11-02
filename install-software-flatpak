@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Base
+flatpak install -y flathub \
+    com.mattjakeman.ExtensionManager \
+    ca.desrt.dconf-editor \
+    com.github.tchx84.Flatseal \
+    org.gtk.Gtk3theme.adw-gtk3-dark \
+    org.localsend.localsend_app \
+    io.bassi.Amberol
+
+# Utilities
+flatpak install -y flathub \
+    com.transmissionbt.Transmission \
+    org.nickvision.tubeconverter \
+    com.github.qarmin.czkawka \
+    com.github.huluti.Curtail \
+    org.gnome.gitlab.YaLTeR.VideoTrimmer \
+    io.github.diegoivan.pdf_metadata_editor \
+    app.drey.EarTag \
+    com.github.finefindus.eyedropper
+
+# Productivity
+flatpak install -y flathub \
+    com.slack.Slack \
+    io.github.nokse22.minitext \
+    org.gnome.Solanum \
+    io.github.fizzyizzy05.binary
+
+# Media
+flatpak install -y flathub \
+    com.github.iwalton3.jellyfin-media-player \
+    de.schmidhuberj.tubefeeder \
+    de.haeckerfelix.Shortwave \
+    org.gnome.Podcasts \
+    com.github.johnfactotum.Foliate
+
+# Other
+flatpak install -y flathub \
+    dev.bragefuglseth.Keypunch \
+    io.github.bytezz.IPLookup \
+    com.github.cassidyjames.dippi \
+    io.github.revisto.drum-machine

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Base
+sudo dnf install -y \
+    tailscale \
+    zsh \
+    btop \
+    vim \
+    nvim \
+    ranger
+
+# Desktop
+sudo dnf install -y \
+    adw-gtk3-theme \
+    source-foundry-hack-fonts \
+    syncthing \
+    thunderbird \
+    mpv \
+    celluloid \
+    zathura
+
+# Utilities
+sudo dnf install -y \
+    gh \
+    pipx \
+    speedtest-cli
+
+# Filesystem
+sudo dnf install -y \
+    btrfs-assistant \
+    deja-dup \
+    ecryptfs-utils
+
+# Optional
+# sudo dnf install -y \
+#     texlive-scheme-medium

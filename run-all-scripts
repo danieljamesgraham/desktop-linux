@@ -4,12 +4,26 @@ sudo chmod +x install-gnome-extensions
 echo -e "\n\e[1;32mINSTALLING GNOME EXTENSIONS...\e[0m\n"
 ./install-gnome-extensions
 
-sudo chmod +x dconf-writes
+sudo chmod +x write-dconf
 echo -e "\n\e[1;32mWRITING DCONF VALUES...\e[0m\n"
-./dconf-writes
+./write-dconf
+
+sudo chmod +x install-software-dnf
+echo -e "\n\e[1;32mINSTALLING DNF PACKAGES...\e[0m\n"
+./install-software-dnf
+
+sudo chmod +x install-software-flatpak
+echo -e "\n\e[1;32mINSTALLING FLATPAK APPLICATIONS...\e[0m\n"
+./install-software-flatpak
+
+sudo chmod +x install-software-scripts
+echo -e "\n\e[1;32mINSTALLING SOFTWARE WITH CUSTOM SCRIPTS...\e[0m\n"
+./install-software-scripts
 
 mkdir -p "$HOME/github/dotfiles"
-git clone "https://github.com/danieljamesgraham/dotfiles" "$HOME/github/dotfiles"
+if [ ! -d "$HOME/github/dotfiles" ]; then
+    git clone "https://github.com/danieljamesgraham/dotfiles" "$HOME/github/dotfiles"
+fi
 # cd "$HOME/github/dotfiles"
 # sudo chmod +x "$HOME/github/dotfiles/run-all-scripts"
 # "$HOME/github/dotfiles/run-all-scripts"

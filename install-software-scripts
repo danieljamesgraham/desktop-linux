@@ -1,0 +1,28 @@
+#!/bin/bash
+
+INSTALL_DIR="$HOME/.local/share"
+
+# Joplin
+JOPLIN_INSTALL_DIR="$INSTALL_DIR/joplin"
+if [ ! -d "$JOPLIN_INSTALL_DIR" ]; then
+    wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash -s -- --install-dir="$JOPLIN_INSTALL_DIR"
+fi
+
+# Zotero
+ZOTERO_INSTALL_DIR="$INSTALL_DIR/zotero"
+if [ ! -d "$ZOTERO_INSTALL_DIR" ]; then
+    sudo dnf install dbus-glib
+    wget "https://www.zotero.org/download/client/dl?channel=release&platform=linux-x86_64" -O /tmp/zotero_installer.tar.bz2
+    tar -xvjf /tmp/zotero_installer.tar.bz2 -C /tmp
+    mv /tmp/Zotero_linux-x86_64/ "$ZOTERO_INSTALL_DIR"
+    cd "$ZOTERO_INSTALL_DIR"
+    sudo chmod +x set_launcher_icon
+    ./set_launcher_icon
+    ln -s "$ZOTERO_INSTALL_DIR/zotero.desktop" "$HOME/.local/share/applications/zotero.desktop"
+fi
+
+# Video Download Helper
+VDHCOAPP_INSTALL_DIR="$INSTALL_DIR/vdhcoapp"
+if [ ! -d "$HOME/.local/share/vdhcoapp" ]; then
+    curl -sSLf https://github.com/aclap-dev/vdhcoapp/releases/latest/download/install.sh | bash
+fi
