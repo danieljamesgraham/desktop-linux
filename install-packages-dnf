@@ -7,7 +7,8 @@ sudo dnf install -y \
     btop \
     vim \
     nvim \
-    ranger
+    ranger \
+    fastfetch
 
 # Desktop
 sudo dnf install -y \
