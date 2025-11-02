@@ -23,6 +23,6 @@ fi
 
 # Video Download Helper
 VDHCOAPP_INSTALL_DIR="$INSTALL_DIR/vdhcoapp"
-if [ ! -d "$HOME/.local/share/vdhcoapp" ]; then
+if [ ! -d "$VDHCOAPP_INSTALL_DIR" ]; then
     curl -sSLf https://github.com/aclap-dev/vdhcoapp/releases/latest/download/install.sh | bash
 fi

@@ -8,17 +8,17 @@ sudo chmod +x write-dconf
 echo -e "\n\e[1;32mWRITING DCONF VALUES...\e[0m\n"
 ./write-dconf
 
-sudo chmod +x install-software-dnf
+sudo chmod +x install-packages-dnf
 echo -e "\n\e[1;32mINSTALLING DNF PACKAGES...\e[0m\n"
-./install-software-dnf
+./install-packages-dnf
 
-sudo chmod +x install-software-flatpak
-echo -e "\n\e[1;32mINSTALLING FLATPAK APPLICATIONS...\e[0m\n"
-./install-software-flatpak
+sudo chmod +x install-packages-flatpak
+echo -e "\n\e[1;32mINSTALLING FLATPAK PACKAGES...\e[0m\n"
+./install-packages-flatpak
 
-sudo chmod +x install-software-scripts
-echo -e "\n\e[1;32mINSTALLING SOFTWARE WITH CUSTOM SCRIPTS...\e[0m\n"
-./install-software-scripts
+sudo chmod +x install-applications-scripts
+echo -e "\n\e[1;32mINSTALLING APPLICATIONS USING SCRIPTS...\e[0m\n"
+./install-applications-scripts
 
 mkdir -p "$HOME/github/dotfiles"
 if [ ! -d "$HOME/github/dotfiles" ]; then
