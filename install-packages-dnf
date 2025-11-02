@@ -15,6 +15,7 @@ sudo dnf install -y \
     source-foundry-hack-fonts \
     syncthing \
     thunderbird \
+    xournalpp \
     mpv \
     celluloid \
     zathura
