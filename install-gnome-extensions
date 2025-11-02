@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# List of extension URLs
+urls=(
+  'https://extensions.gnome.org/extension/5425/battery-time/'
+  'https://extensions.gnome.org/extension/779/clipboard-indicator/'
+  'https://extensions.gnome.org/extension/6242/emoji-copy/'
+  'https://extensions.gnome.org/extension/5949/gjs-osk/'
+  'https://extensions.gnome.org/extension/3843/just-perfection/'
+  'https://extensions.gnome.org/extension/7/removable-drive-menu/'
+  'https://extensions.gnome.org/extension/5389/screen-rotate/'
+  'https://extensions.gnome.org/extension/5090/space-bar/'
+  'https://extensions.gnome.org/extension/4356/top-bar-organizer/'
+  'https://extensions.gnome.org/extension/1460/vitals/'
+  'https://extensions.gnome.org/extension/6676/xwayland-indicator/'
+)
+
+# Loop through each URL
+for url in "${urls[@]}"; do
+  # get package metadata
+  id=$(echo "${url}" | cut --delimiter=/ --fields=5)
+  url_pkg_metadata="https://extensions.gnome.org/extension-info/?pk=${id}"
+
+  # Extract data for each extension
+  uuid=$(curl -s "$url_pkg_metadata" | jq -r '.uuid' | tr -d '@')
+  latest_extension_version=$(curl -s "$url_pkg_metadata" | jq -r '.shell_version_map | to_entries | max_by(.value.version) | .value.version')
+  latest_shell_version=$(curl -s "$url_pkg_metadata" | jq -r '.shell_version_map | to_entries | max_by(.value.version) | .key')
+
+  # Download package
+  filename="${uuid}.v${latest_extension_version}.shell-extension.zip"
+  url_pkg="https://extensions.gnome.org/extension-data/${filename}"
+  wget -q -P /tmp "${url_pkg}"
+
+  # Install extension
+  gnome-extensions install "/tmp/${filename}"
+
+  # Print the results
+  if [ $? -eq 0 ]; then
+    echo "Installed: $uuid"
+    echo "Extension version: $latest_extension_version"
+    echo -e "Shell version: $latest_shell_version\n"
+  else
+    echo -e "\033[1;31mFailed to install $uuid\033[0m\n"
+  fi
+done
+
+# Add unlock-dialog session mode for gjs-osk
+jq '. + {"session-modes": ["user","unlock-dialog"]}' ~/.local/share/gnome-shell/extensions/gjsosk@vishram1123.com/metadata.json > /tmp/metadata.json && mv /tmp/metadata.json ~/.local/share/gnome-shell/extensions/gjsosk@vishram1123.com/metadata.json

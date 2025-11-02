@@ -1,0 +1,267 @@
+#!/bin/bash
+
+# Run `dconf watch /` to monitor changes to add to script
+
+dconf_write() {
+    # Read arguments
+    local title="$1"
+    shift
+    local settings=("$@")
+
+    echo -e "\e[1;34m$title\e[0m"
+
+    # Pipe all lines to column
+    {
+        for kv in "${settings[@]}"; do
+            # Split arugment into key value pairs
+            local path="${kv%% *}"
+            local value="${kv#* }"
+
+            # Echo the modification
+            local short_path=(${path//\// })
+            local short_path_1="${short_path[$((${#short_path[@]}-2))]}"
+            local short_path_2="${short_path[$((${#short_path[@]}-1))]}"
+            echo -e "${short_path_1}\t${short_path_2}\t${value}"
+
+            dconf write "$path" "$value"
+        done
+    } | column -t -s $'\t'; echo ""  
+}
+
+
+# Settings
+
+dconf_write "System Settings" \
+"/org/gnome/settings-daemon/plugins/power/idle-dim false" \
+"/org/gnome/desktop/session/idle-delay uint32 0" \
+"/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type 'nothing'" \
+"/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type 'nothing'" \
+"/org/gnome/desktop/interface/show-battery-percentage true" \
+"/org/gnome/desktop/interface/enable-hot-corners false" \
+"/org/gnome/desktop/wm/preferences/num-workspaces 10" \
+"/org/gnome/shell/app-switcher/current-workspace-only true" \
+"/org/gnome/desktop/interface/color-scheme 'prefer-dark'" \
+"/org/gnome/desktop/peripherals/touchpad/click-method 'areas'" \
+"/org/gnome/desktop/peripherals/keyboard/repeat-interval uint32 24" \
+"/org/gnome/desktop/peripherals/keyboard/delay uint32 350" \
+"/org/gnome/desktop/privacy/recent-files-max-age 7" \
+"/org/gnome/desktop/privacy/remove-old-trash-files true" \
+"/org/gnome/desktop/privacy/remove-old-temp-files true" \
+"/org/gnome/desktop/privacy/old-files-age uint32 7" \
+"/org/gnome/desktop/session/idle-delay uint32 0" \
+"/org/gnome/desktop/screensaver/lock-enabled true" \
+"/org/gnome/desktop/screensaver/lock-delay uint32 0" \
+"/org/gnome/desktop/notifications/show-in-lock-screen true" \
+"/org/gnome/system/location/enabled true" \
+"/system/locale/region 'en_GB.UTF-8'" \
+"/org/gnome/desktop/interface/clock-show-weekday true" \
+"/org/gnome/desktop/datetime/automatic-timezone true" \
+"/org/gtk/settings/file-chooser/clock-format '24h'"
+
+dconf_write "Tweaks" \
+"/org/gnome/desktop/interface/gtk-theme 'adw-gtk3-dark'" \
+"/org/gnome/desktop/input-sources/xkb-options ['caps:swapescape']"
+
+dconf_write "Typing Booster" \
+"/org/freedesktop/ibus/engine/typing-booster/wordpredictions false"
+
+
+# Keybindings
+
+dconf_write "Accessibility Keybindings" \
+"/org/gnome/settings-daemon/plugins/media-keys/screenreader @as []" \
+"/org/gnome/settings-daemon/plugins/media-keys/magnifier @as []" \
+"/org/gnome/settings-daemon/plugins/media-keys/magnifier-zoom-in @as []" \
+"/org/gnome/settings-daemon/plugins/media-keys/magnifier-zoom-out @as []"
+
+dconf_write "Launcher Keybindings" \
+"/org/gnome/settings-daemon/plugins/media-keys/help @as []" \
+"/org/gnome/settings-daemon/plugins/media-keys/email @as []" \
+"/org/gnome/settings-daemon/plugins/media-keys/home ['<Super>f']" \
+"/org/gnome/settings-daemon/plugins/media-keys/calculator ['<Super>c']" \
+"/org/gnome/settings-daemon/plugins/media-keys/www ['<Super>w']" \
+"/org/gnome/settings-daemon/plugins/media-keys/control-center ['<Super>comma']"
+
+dconf_write "Navigation Keybindings" \
+"/org/gnome/desktop/wm/keybindings/show-desktop @as []" \
+"/org/gnome/desktop/wm/keybindings/switch-applications @as []" \
+"/org/gnome/desktop/wm/keybindings/switch-applications-backward @as []" \
+"/org/gnome/desktop/wm/keybindings/cycle-panels @as []" \
+"/org/gnome/desktop/wm/keybindings/cycle-panels-backward @as []" \
+"/org/gnome/desktop/wm/keybindings/switch-windows ['<Alt>Tab']" \
+"/org/gnome/desktop/wm/keybindings/switch-windows-backward ['<Shift><Alt>Tab']" \
+"/org/gnome/desktop/wm/keybindings/switch-group ['<Alt>grave']" \
+"/org/gnome/desktop/wm/keybindings/switch-group-backward ['<Shift><Alt>grave']" \
+"/org/gnome/desktop/wm/keybindings/cycle-group ['<Super>grave']" \
+"/org/gnome/desktop/wm/keybindings/cycle-group-backward ['<Shift><Super>grave']" \
+"/org/gnome/desktop/wm/keybindings/cycle-windows ['<Super>Tab']" \
+"/org/gnome/desktop/wm/keybindings/cycle-windows-backward ['<Shift><Super>Tab']" \
+"/org/gnome/mutter/keybindings/switch-monitor ['XF86Display']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-left ['<Super>p']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-right ['<Super>n']" \
+"/org/gnome/shell/keybindings/open-new-window-application-1 @as []" \
+"/org/gnome/shell/keybindings/open-new-window-application-2 @as []" \
+"/org/gnome/shell/keybindings/open-new-window-application-3 @as []" \
+"/org/gnome/shell/keybindings/open-new-window-application-4 @as []" \
+"/org/gnome/shell/keybindings/open-new-window-application-5 @as []" \
+"/org/gnome/shell/keybindings/open-new-window-application-6 @as []" \
+"/org/gnome/shell/keybindings/open-new-window-application-7 @as []" \
+"/org/gnome/shell/keybindings/open-new-window-application-8 @as []" \
+"/org/gnome/shell/keybindings/open-new-window-application-9 @as []" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-1 ['<Super>1']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-2 ['<Super>2']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-3 ['<Super>3']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-4 ['<Super>4']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-5 ['<Super>5']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-6 ['<Super>6']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-7 ['<Super>7']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-8 ['<Super>8']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-9 ['<Super>9']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-10 ['<Super>0']" \
+"/org/gnome/desktop/wm/keybindings/switch-to-workspace-last @as []" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-last @as []" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-right ['<Shift><Super>n']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-left ['<Shift><Super>p']" \
+"/org/gnome/shell/keybindings/switch-to-application-1 @as []" \
+"/org/gnome/shell/keybindings/switch-to-application-2 @as []" \
+"/org/gnome/shell/keybindings/switch-to-application-3 @as []" \
+"/org/gnome/shell/keybindings/switch-to-application-4 @as []" \
+"/org/gnome/shell/keybindings/switch-to-application-5 @as []" \
+"/org/gnome/shell/keybindings/switch-to-application-6 @as []" \
+"/org/gnome/shell/keybindings/switch-to-application-7 @as []" \
+"/org/gnome/shell/keybindings/switch-to-application-8 @as []" \
+"/org/gnome/shell/keybindings/switch-to-application-9 @as []" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-1 ['<Shift><Super>1']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-2 ['<Shift><Super>2']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-3 ['<Shift><Super>3']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-4 ['<Shift><Super>4']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-5 ['<Shift><Super>5']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-6 ['<Shift><Super>6']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-7 ['<Shift><Super>7']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-8 ['<Shift><Super>8']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-9 ['<Shift><Super>9']" \
+"/org/gnome/desktop/wm/keybindings/move-to-workspace-10 ['<Shift><Super>0']" \
+"/org/gnome/desktop/wm/keybindings/move-to-monitor-left ['<Alt><Super>h']" \
+"/org/gnome/desktop/wm/keybindings/move-to-monitor-down ['<Alt><Super>j']" \
+"/org/gnome/desktop/wm/keybindings/move-to-monitor-up ['<Alt><Super>k']" \
+"/org/gnome/desktop/wm/keybindings/move-to-monitor-right ['<Alt><Super>l']"
+
+dconf_write "Sound and Media Keybindings" \
+"/org/gnome/settings-daemon/plugins/media-keys/play ['<Super>space']" \
+"/org/gnome/settings-daemon/plugins/media-keys/next ['<Shift><Super>period']" \
+"/org/gnome/settings-daemon/plugins/media-keys/previous ['<Shift><Super>comma']" \
+"/org/gnome/settings-daemon/plugins/media-keys/volume-down ['<Super>minus']" \
+"/org/gnome/settings-daemon/plugins/media-keys/volume-up ['<Super>equal']"
+
+dconf_write "System Keybindings" \
+"/org/gnome/settings-daemon/plugins/media-keys/screensaver @as []" \
+"/org/gnome/settings-daemon/plugins/media-keys/screensaver ['<Shift><Super>q']" \
+"/org/gnome/mutter/wayland/keybindings/restore-shortcuts @as []" \
+"/org/gnome/shell/keybindings/focus-active-notification @as []" \
+"/org/gnome/shell/keybindings/toggle-message-tray ['<Super>m']"
+
+dconf_write "Typing Keybindings" \
+"/org/gnome/desktop/wm/keybindings/switch-input-source @as []" \
+"/org/gnome/desktop/wm/keybindings/switch-input-source-backward @as []"
+
+dconf_write "Window Keybindings" \
+"/org/gnome/desktop/wm/keybindings/minimize @as []" \
+"/org/gnome/desktop/wm/keybindings/begin-move @as []" \
+"/org/gnome/desktop/wm/keybindings/begin-resize @as []" \
+"/org/gnome/desktop/wm/keybindings/toggle-maximized @as []" \
+"/org/gnome/desktop/wm/keybindings/close ['<Super>q']" \
+"/org/gnome/mutter/keybindings/toggle-tiled-left ['<Shift><Super>h']" \
+"/org/gnome/desktop/wm/keybindings/unmaximize ['<Shift><Super>j']" \
+"/org/gnome/desktop/wm/keybindings/maximize ['<Shift><Super>k']" \
+"/org/gnome/mutter/keybindings/toggle-tiled-right ['<Shift><Super>l']"
+
+dconf_write "Custom Shortcut Keybindings" \
+"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']" \
+"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding '<Super>t'" \
+"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command 'ptyxis --new-window'" \
+"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name 'ptyxis'"
+
+
+# GNOME Extensions
+
+dconf_write "Clipboard Indicator" \
+"/org/gnome/shell/extensions/clipboard-indicator/move-item-first true" \
+"/org/gnome/shell/extensions/clipboard-indicator/strip-text true" \
+"/org/gnome/shell/extensions/clipboard-indicator/paste-button false" \
+"/org/gnome/shell/extensions/clipboard-indicator/clear-on-boot true" \
+"/org/gnome/shell/extensions/clipboard-indicator/history-size 25" \
+"/org/gnome/shell/extensions/clipboard-indicator/cache-size 20" \
+"/org/gnome/shell/extensions/clipboard-indicator/next-entry ['<Super>v']" \
+"/org/gnome/shell/extensions/clipboard-indicator/prev-entry ['<Shift><Super>v']" \
+"/org/gnome/shell/extensions/clipboard-indicator/toggle-menu ['<Shift><Super>c']" \
+"/org/gnome/shell/extensions/clipboard-indicator/clear-history ['<Alt><Shift><Super>c']" \
+"/org/gnome/shell/extensions/clipboard-indicator/private-mode-binding ['<Alt><Shift><Super>v']"
+
+dconf_write "Emoji Copy" \
+"/org/gnome/shell/extensions/emoji-copy/emoji-keybind ['<Super>e']"
+
+dconf_write "GJS OSK" \
+"/org/gnome/shell/extensions/gjsosk/layout-landscape 5" \
+"/org/gnome/shell/extensions/gjsosk/layout-portrait 5" \
+"/org/gnome/shell/extensions/gjsosk/enable-tap-gesture 0" \
+"/org/gnome/shell/extensions/gjsosk/landscape-height-percent 45" \
+"/org/gnome/shell/extensions/gjsosk/landscape-width-percent 60" \
+"/org/gnome/shell/extensions/gjsosk/play-sound false" \
+"/org/gnome/shell/extensions/gjsosk/font-bold true" \
+"/org/gnome/shell/extensions/gjsosk/outer-spacing-px 10" \
+"/org/gnome/shell/extensions/gjsosk/snap-spacing-px 10" \
+"/org/gnome/shell/extensions/gjsosk/round-key-corners true"
+
+dconf_write "Just Perfection" \
+"/org/gnome/shell/extensions/just-perfection/keyboard-layout false" \
+"/org/gnome/shell/extensions/just-perfection/accessibility-menu false" \
+"/org/gnome/shell/extensions/just-perfection/quick-settings-dark-mode false" \
+"/org/gnome/shell/extensions/just-perfection/quick-settings-night-light false" \
+"/org/gnome/shell/extensions/just-perfection/quick-settings-airplane-mode false" \
+"/org/gnome/shell/extensions/just-perfection/calendar false" \
+"/org/gnome/shell/extensions/just-perfection/workspace-popup false" \
+"/org/gnome/shell/extensions/just-perfection/workspace false" \
+"/org/gnome/shell/extensions/just-perfection/workspaces-in-app-grid false" \
+"/org/gnome/shell/extensions/just-perfection/workspace-wrap-around true" \
+"/org/gnome/shell/extensions/just-perfection/window-demands-attention-focus true" \
+"/org/gnome/shell/extensions/just-perfection/workspace-thumbnail-to-main-view true" \
+"/org/gnome/shell/extensions/just-perfection/switcher-popup-delay false" \
+"/org/gnome/shell/extensions/just-perfection/startup-status 0"
+
+dconf_write "Space Bar" \
+"/org/gnome/shell/extensions/space-bar/behavior/scroll-wheel-horizontal 'normal'" \
+"/org/gnome/shell/extensions/space-bar/behavior/scroll-wheel-wrap-around true" \
+"/org/gnome/shell/extensions/space-bar/behavior/show-empty-workspaces false" \
+"/org/gnome/shell/extensions/space-bar/shortcuts/enable-activate-workspace-shortcuts false" \
+"/org/gnome/shell/extensions/space-bar/shortcuts/move-workspace-left @as []" \
+"/org/gnome/shell/extensions/space-bar/shortcuts/move-workspace-right @as []" \
+"/org/gnome/shell/extensions/space-bar/shortcuts/activate-previous-key @as []" \
+"/org/gnome/shell/extensions/space-bar/shortcuts/activate-empty-key @as []" \
+"/org/gnome/shell/extensions/space-bar/shortcuts/open-menu @as []"
+
+dconf_write "Top Bar Organizer" \
+"/org/gnome/shell/extensions/top-bar-organizer/right-box-order ['drive-menu', 'xwayland-indicator@swsnr.de', 'GJS OSK Indicator', 'emoji-copy@felipeftn', 'clipboardIndicator', 'vitalsMenu', 'screenRecording', 'screenSharing', 'dwellClick', 'a11y', 'keyboard', 'quickSettings']"
+
+dconf_write "Vitals" \
+"/org/gnome/shell/extensions/vitals/update-time 10" \
+"/org/gnome/shell/extensions/vitals/icon-style 1" \
+"/org/gnome/shell/extensions/vitals/show-system false" \
+"/org/gnome/shell/extensions/vitals/show-battery true" \
+"/org/gnome/shell/extensions/vitals/hot-sensors ['_default_icon_']"
+
+
+# Applications
+
+dconf_write "Nautilus" \
+"/org/gtk/gtk4/settings/file-chooser/sort-directories-first true" \
+"/org/gnome/nautilus/list-view/use-tree-view true" \
+"/org/gnome/nautilus/list-view/default-zoom-level 'small'" \
+"/org/gnome/nautilus/preferences/default-folder-viewer 'list-view'" \
+"/org/gtk/gtk4/settings/file-chooser/show-hidden true" \
+
+dconf_write "PTYXIS" \
+"/org/gnome/Ptyxis/use-system-font false" \
+"/org/gnome/Ptyxis/font-name 'Hack 12'" \
+"/org/gnome/Ptyxis/restore-session false" \
+"/org/gnome/Ptyxis/restore-window-size false" \
+"/org/gnome/Ptyxis/visual-bell false"
