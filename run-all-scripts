@@ -1,7 +1,15 @@
 #!/bin/bash
 
 sudo chmod +x install-gnome-extensions
+echo -e "\n\e[1;32mINSTALLING GNOME EXTENSIONS...\e[0m\n"
 ./install-gnome-extensions
 
 sudo chmod +x dconf-writes
+echo -e "\n\e[1;32mWRITING DCONF VALUES...\e[0m\n"
 ./dconf-writes
+
+mkdir -p "$HOME/github/dotfiles"
+git clone "https://github.com/danieljamesgraham/dotfiles" "$HOME/github/dotfiles"
+# cd "$HOME/github/dotfiles"
+# sudo chmod +x "$HOME/github/dotfiles/run-all-scripts"
+# "$HOME/github/dotfiles/run-all-scripts"
