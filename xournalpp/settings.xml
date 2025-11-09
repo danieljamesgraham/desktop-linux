@@ -5,21 +5,21 @@
   <property name="minimumPressure" value="0.05"/>
   <property name="pressureMultiplier" value="1"/>
   <property name="zoomGesturesEnabled" value="true"/>
-  <property name="selectedToolbar" value="Minimal Top Copy"/>
-  <property name="lastSavePath" value=""/>
-  <property name="lastOpenPath" value=""/>
+  <property name="selectedToolbar" value="Minimal Top Copy Copy"/>
+  <property name="lastSavePath" value="/home/djgraham/syncthing/mit/6-6400/slides"/>
+  <property name="lastOpenPath" value="/home/djgraham/syncthing/mit/6-6400/slides/originals"/>
   <property name="lastImagePath" value=""/>
   <property name="edgePanSpeed" value="20"/>
   <property name="edgePanMaxMult" value="5"/>
   <property name="zoomStep" value="10"/>
   <property name="zoomStepScroll" value="2"/>
-  <property name="displayDpi" value="120"/>
+  <property name="displayDpi" value="148"/>
   <property name="mainWndWidth" value="800"/>
   <property name="mainWndHeight" value="600"/>
   <property name="maximized" value="true"/>
   <property name="showToolbar" value="true"/>
   <property name="showSidebar" value="true"/>
-  <property name="sidebarWidth" value="150"/>
+  <property name="sidebarWidth" value="149"/>
   <property name="sidebarNumberingStyle" value="1"/>
   <property name="sidebarOnRight" value="false"/>
   <property name="scrollbarOnLeft" value="false"/>
@@ -39,9 +39,9 @@
   <!--Which GUI elements are shown in default view mode, separated by a colon (,)-->
   <property name="defaultViewModeAttributes" value="showMenubar,showToolbar,showSidebar"/>
   <!--Which GUI elements are shown in fullscreen view mode, separated by a colon (,)-->
-  <property name="fullscreenViewModeAttributes" value="goFullscren,showToolbar"/>
+  <property name="fullscreenViewModeAttributes" value="goFullscren,showMenubar,showToolbar,showSidebar"/>
   <!--Which GUI elements are shown in presentation view mode, separated by a colon (,)-->
-  <property name="presentationViewModeAttributes" value="goFullscren,showToolbar"/>
+  <property name="presentationViewModeAttributes" value="goFullscren"/>
   <!--The cursor icon used with a stylus, allowed values are "none", "dot", "big", "arrow"-->
   <property name="stylusCursorType" value="dot"/>
   <!--The eraser cursor visibility used with a stylus, allowed values are "never", "always", "hover", "touch"-->
@@ -51,18 +51,18 @@
   <!--Dark/light mode, allowed values are "useSystem", "forceLight", "forceDark"-->
   <property name="themeVariant" value="forceDark"/>
   <property name="highlightPosition" value="false"/>
-  <property name="cursorHighlightColor" value="2164260608"/>
-  <property name="cursorHighlightBorderColor" value="2147483903"/>
-  <property name="cursorHighlightRadius" value="30"/>
+  <property name="cursorHighlightColor" value="4278190080"/>
+  <property name="cursorHighlightBorderColor" value="4294967295"/>
+  <property name="cursorHighlightRadius" value="5"/>
   <property name="cursorHighlightBorderWidth" value="0"/>
   <property name="useStockIcons" value="false"/>
   <property name="disableScrollbarFadeout" value="true"/>
   <property name="disableAudio" value="false"/>
   <!--Hides scroolbars in the main window, allowed values: "none", "horizontal", "vertical", "both"-->
-  <property name="scrollbarHideType" value="horizontal"/>
-  <property name="autoloadMostRecent" value="true"/>
+  <property name="scrollbarHideType" value="both"/>
+  <property name="autoloadMostRecent" value="false"/>
   <property name="autoloadPdfXoj" value="true"/>
-  <property name="defaultSaveName" value="%F_note_$H-$M"/>
+  <property name="defaultSaveName" value="%F_note"/>
   <property name="defaultPdfExportName" value="%{name}_annotated"/>
   <property name="autosaveEnabled" value="true"/>
   <property name="autosaveTimeout" value="3"/>
@@ -74,7 +74,7 @@
   <property name="drawDirModsRadius" value="50"/>
   <property name="snapRotation" value="true"/>
   <property name="snapRotationTolerance" value="0.3"/>
-  <property name="snapGrid" value="true"/>
+  <property name="snapGrid" value="false"/>
   <property name="snapGridTolerance" value="0.5"/>
   <property name="snapGridSize" value="14.17"/>
   <property name="strokeRecognizerMinSize" value="40"/>
@@ -90,10 +90,10 @@
   <property name="pdfPageCacheSize" value="10"/>
   <property name="preloadPagesBefore" value="5"/>
   <property name="preloadPagesAfter" value="10"/>
-  <property name="eagerPageCleanup" value="false"/>
+  <property name="eagerPageCleanup" value="true"/>
   <!--Config for new pages-->
-  <property name="pageTemplate" value="xoj/template&#10;copyLastPageSettings=true&#10;size=595.275591x841.889764&#10;backgroundType=lined&#10;backgroundColor=#ffffff&#10;"/>
-  <property name="sizeUnit" value=""/>
+  <property name="pageTemplate" value="xoj/template&#10;copyLastPageSize=false&#10;copyLastPageSettings=true&#10;size=611.999983x791.999983&#10;backgroundType=lined&#10;backgroundColor=#ffffff&#10;"/>
+  <property name="sizeUnit" value="cm"/>
   <property name="audioFolder" value=""/>
   <property name="audioInputDevice" value="-1"/>
   <property name="audioOutputDevice" value="-1"/>
@@ -143,8 +143,8 @@
       <attribute name="tool" type="string" value="pen"/>
     </data>
     <data name="eraser">
-      <attribute name="eraserMode" type="string" value="none"/>
-      <attribute name="size" type="string" value="none"/>
+      <attribute name="eraserMode" type="string" value="deleteStroke"/>
+      <attribute name="size" type="string" value="thin"/>
       <attribute name="tool" type="string" value="eraser"/>
     </data>
     <data name="middle">
@@ -154,13 +154,13 @@
       <attribute name="tool" type="string" value="none"/>
     </data>
     <data name="stylus">
-      <attribute name="color" type="hex" value="ff1a5fb4"/>
+      <attribute name="tool" type="string" value="none"/>
+    </data>
+    <data name="stylus2">
+      <attribute name="color" type="hex" value="ff000000"/>
       <attribute name="drawingType" type="string" value="line"/>
       <attribute name="size" type="string" value="none"/>
       <attribute name="tool" type="string" value="pen"/>
-    </data>
-    <data name="stylus2">
-      <attribute name="tool" type="string" value="none"/>
     </data>
     <data name="touch">
       <attribute name="device" type="string" value=""/>
@@ -212,14 +212,14 @@
     </data>
     <data name="eraser">
       <attribute name="drawingType" type="string" value="default"/>
-      <attribute name="size" type="string" value="MEDIUM"/>
-      <attribute name="type" type="string" value="default"/>
+      <attribute name="size" type="string" value="THIN"/>
+      <attribute name="type" type="string" value="deleteStroke"/>
     </data>
     <data name="hand">
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="highlighter">
-      <attribute name="color" type="hex" value="ffffff00"/>
+      <attribute name="color" type="hex" value="26a269"/>
       <attribute name="drawingType" type="string" value="default"/>
       <attribute name="fill" type="int" value="0"/>
       <attribute name="fillAlpha" type="int" value="128"/>
@@ -229,11 +229,11 @@
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="pen">
-      <attribute name="color" type="hex" value="ff3333cc"/>
+      <attribute name="color" type="hex" value="000000"/>
       <attribute name="drawingType" type="string" value="default"/>
       <attribute name="fill" type="int" value="0"/>
       <attribute name="fillAlpha" type="int" value="128"/>
-      <attribute name="size" type="string" value="MEDIUM"/>
+      <attribute name="size" type="string" value="THIN"/>
       <attribute name="style" type="string" value="plain"/>
     </data>
     <data name="playObject">
@@ -266,7 +266,7 @@
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="text">
-      <attribute name="color" type="hex" value="ff000000"/>
+      <attribute name="color" type="hex" value="000000"/>
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="verticalSpace">
